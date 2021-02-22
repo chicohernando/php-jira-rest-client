@@ -10,7 +10,7 @@ class VelocityService extends \JiraRestApi\JiraClient
 {
     use GreenHopperTrait;
 
-    private $uri = '/rapid/charts/velocity.json';
+    private $uri = '/rapid/charts/velocity';
 
     public function __construct(ConfigurationInterface $configuration = null, LoggerInterface $logger = null, $path = './')
     {
@@ -18,10 +18,9 @@ class VelocityService extends \JiraRestApi\JiraClient
         $this->setupAPIUri();
     }
 
-    public function getVelocityForBoardAndSprint($boardId, $sprintId, $paramArray = [])
+    public function getVelocitiesForBoard($boardId, $paramArray = [])
     {
         $paramArray['rapidViewId'] = $boardId;
-        $paramArray['sprintId'] = $sprintId;
         $json = $this->exec($this->uri.'/'.$this->toHttpQueryParameter($paramArray), null);
         $velocity = json_decode($json);
 
